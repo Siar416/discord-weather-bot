@@ -24,7 +24,17 @@ client.on("messageCreate", async (message) => {
     try {
       let response = await getWeatherData(location);
 
-      console.log(response);
+      const weatherEmbed = new EmbedBuilder()
+        .setColor("#0099ff")
+        .setTitle(`The Current Weather in ${response.data.location.name}`)
+        .setDescription(`Temperature: ${response.data.current.temp_c}°C`)
+        .addFields({
+          name: "Condition",
+          value: response.data.current.condition.text,
+        })
+        .setTimestamp();
+
+      message.channel.send({ embeds: [weatherEmbed] });
     } catch (error) {
       console.log(`Error retrieving weather data: ${error}`);
       message.channel.send("Sorry, I couldn't retrieve the weather data.");
