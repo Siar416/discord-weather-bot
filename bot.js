@@ -1,6 +1,6 @@
 require("dotenv/config");
 const { Client, IntentsBitField, EmbedBuilder } = require("discord.js");
-const axios = require("axios");
+const { getWeatherData } = require("./utils/getWeatherData");
 
 const client = new Client({
   intents: [
