@@ -28,10 +28,16 @@ client.on("messageCreate", async (message) => {
         .setColor("#0099ff")
         .setTitle(`The Current Weather in ${response.data.location.name}`)
         .setDescription(`Temperature: ${response.data.current.temp_c}°C`)
-        .addFields({
-          name: "Condition",
-          value: response.data.current.condition.text,
-        })
+        .addFields(
+          {
+            name: "Feels like",
+            value: `${response.data.current.feelslike_c}°C`,
+          },
+          {
+            name: "Condition",
+            value: response.data.current.condition.text,
+          }
+        )
         .setTimestamp();
 
       message.channel.send({ embeds: [weatherEmbed] });
